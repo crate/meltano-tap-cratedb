@@ -27,7 +27,7 @@ class TapCrateDB(TapPostgres):
         url = make_url(self.get_sqlalchemy_url(config=self.config))
         ssh_config = self.config.get("ssh_tunnel", {})
 
-        if ssh_config.get("enable", False):
+        if ssh_config.get("enable", False):  # pragma: no cover
             # Return a new URL with SSH tunnel parameters
             url = self.ssh_tunnel_connect(ssh_config=ssh_config, url=url)
 

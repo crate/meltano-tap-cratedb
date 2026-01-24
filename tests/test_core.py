@@ -48,6 +48,8 @@ def setup_test_table(table_name, sqlalchemy_url):
         table_name,
         metadata_obj,
         # CrateDB adjustments.
+        # TODO: Use synthetic autoincrement from `sqlalchemy-cratedb` package.
+        #       https://github.com/crate-workbench/meltano-tap-cratedb/issues/9
         Column("id", BigInteger, primary_key=True, server_default=sqlalchemy.text("NOW()::LONG")),
         Column("updated_at", DateTime(), nullable=False),
         Column("name", String()),
@@ -55,12 +57,13 @@ def setup_test_table(table_name, sqlalchemy_url):
     with engine.begin() as conn:
         metadata_obj.create_all(conn)
         conn.execute(text(f"DELETE FROM {table_name}"))
-        for _ in range(10):
+        for _ in range(1000):
             insert = test_replication_key_table.insert().values(
                 updated_at=fake.date_between(date1, date2), name=fake.name()
             )
             conn.execute(insert)
         # CrateDB: TODO: Generalize synchronizing write operations.
+        # https://github.com/crate-workbench/meltano-tap-cratedb/issues/4
         conn.execute(text(f"REFRESH TABLE {table_name}"))
 
 
@@ -80,6 +83,7 @@ TapCrateDBTest = get_tap_test_class(
     catalog="tests/resources/data.json",
     custom_suites=[custom_test_replication_key],
     # FIXME: Re-enable stream tests.
+    #        https://github.com/crate-workbench/meltano-tap-cratedb/issues/8
     # FAILED tests/test_core.py::TestTapCrateDB::
     # test_tap_stream_record_matches_stream_schema[doc-test_replication_key] -
     #   AssertionError: Record does not match stream schema: 1667433600000 is not of type 'string' (path: updated_at)
@@ -104,6 +108,7 @@ TapCrateDBTestSelectedColumnsOnly = get_tap_test_class(
     catalog="tests/resources/data_selected_columns_only.json",
     custom_suites=[custom_test_selected_columns_only],
     # FIXME: Re-enable stream tests.
+    #        https://github.com/crate-workbench/meltano-tap-cratedb/issues/8
     # FAILED tests/test_core.py::TestTapCrateDB::
     # test_tap_stream_record_matches_stream_schema[doc-test_replication_key] -
     #   AssertionError: Record does not match stream schema: 1667433600000 is not of type 'string' (path: updated_at)
@@ -125,7 +130,8 @@ class TestTapCrateDB(TapCrateDBTest):
         teardown_test_table(self.table_name, self.sqlalchemy_url)
 
 
-@pytest.mark.skip("Will block the execution. WTF!")
+# https://github.com/crate-workbench/meltano-tap-cratedb/issues/5
+@pytest.mark.skip("FIXME: Will heavily block the execution. Why?")
 class TestTapCrateDB_NOSQLALCHEMY(TapCrateDBTestNOSQLALCHEMY):
     table_name = TABLE_NAME
     sqlalchemy_url = SAMPLE_CONFIG["sqlalchemy_url"]
@@ -179,6 +185,7 @@ def test_temporal_datatypes():
         )
         conn.execute(insert)
         # CrateDB: TODO: Generalize synchronizing write operations.
+        # https://github.com/crate-workbench/meltano-tap-cratedb/issues/4
         conn.execute(text(f"REFRESH TABLE {table_name}"))
     tap = TapCrateDB(config=SAMPLE_CONFIG)
     tap_catalog = json.loads(tap.catalog_json_text)
@@ -218,7 +225,9 @@ def test_temporal_datatypes():
         # CrateDB does not provide the data types `DATE` and `TIME`.
         # "column_date": "2022-03-19",
         # "column_time": "06:04:19.222000",
-        # FIXME: Why?
+        # FIXME: It is expected that CrateDB yields integer values for its TIMESTAMP types.
+        #        But why is it a negative value here?
+        #        https://github.com/crate-workbench/meltano-tap-cratedb/issues/3
         # "column_timestamp": "1918-02-03T13:00:01",
         "column_timestamp": -1638097199000,
     }
@@ -246,6 +255,7 @@ def test_jsonb_json():
         )
         conn.execute(insert)
         # CrateDB: TODO: Generalize synchronizing write operations.
+        # https://github.com/crate-workbench/meltano-tap-cratedb/issues/4
         conn.execute(text(f"REFRESH TABLE {table_name}"))
     tap = TapCrateDB(config=SAMPLE_CONFIG)
     tap_catalog = json.loads(tap.catalog_json_text)
@@ -356,6 +366,8 @@ def test_invalid_python_dates():
     Check out https://www.psycopg.org/psycopg3/docs/advanced/adapt.html#example-handling-infinity-date
     for more information.
 
+    TODO: Review.
+          https://github.com/crate-workbench/meltano-tap-cratedb/issues/7
     """
     table_name = "test_invalid_python_dates"
     engine = sqlalchemy.create_engine(SAMPLE_CONFIG["sqlalchemy_url"], future=True)
