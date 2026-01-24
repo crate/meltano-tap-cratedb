@@ -3,7 +3,7 @@ import pytest
 
 pytest.skip("Will do that later", allow_module_level=True)
 
-from tap_cratedb.tap import TapCrateDB
+from tap_cratedb.tap import TapCrateDB  # noqa: E402
 
 TABLE_NAME = "test_replication_key"
 SAMPLE_CONFIG = {

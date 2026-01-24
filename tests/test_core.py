@@ -13,7 +13,6 @@ from sqlalchemy import BigInteger, Column, DateTime, MetaData, Numeric, String, 
 from sqlalchemy.dialects.postgresql import BIGINT, JSON, JSONB, TIMESTAMP
 
 from tap_cratedb.tap import TapCrateDB
-
 from tests.settings import DB_SCHEMA_NAME
 from tests.test_replication_key import TABLE_NAME, TapTestReplicationKey
 from tests.test_selected_columns_only import (
@@ -70,13 +69,9 @@ def teardown_test_table(table_name, sqlalchemy_url):
         conn.execute(text(f"DROP TABLE {table_name}"))
 
 
-custom_test_replication_key = suites.TestSuite(
-    kind="tap", tests=[TapTestReplicationKey]
-)
+custom_test_replication_key = suites.TestSuite(kind="tap", tests=[TapTestReplicationKey])
 
-custom_test_selected_columns_only = suites.TestSuite(
-    kind="tap", tests=[TapTestSelectedColumnsOnly]
-)
+custom_test_selected_columns_only = suites.TestSuite(kind="tap", tests=[TapTestSelectedColumnsOnly])
 
 TapCrateDBTest = get_tap_test_class(
     tap_class=TapCrateDB,
@@ -165,9 +160,9 @@ def test_temporal_datatypes():
     table = Table(
         table_name,
         metadata_obj,
-        # CrateDB does not provide the data type `DATE`: UnsupportedFeatureException[Type `date` does not support storage]
+        # CrateDB does not provide data type `DATE`: UnsupportedFeatureException[Type `date` does not support storage]
         # Column("column_date", DATE),
-        # CrateDB does not provide the data type `TIME`: SQLParseException[Cannot find data type: time]
+        # CrateDB does not provide data type `TIME`: SQLParseException[Cannot find data type: time]
         # Column("column_time", TIME),
         Column("column_timestamp", TIMESTAMP),
     )
@@ -177,8 +172,8 @@ def test_temporal_datatypes():
         metadata_obj.create_all(conn)
         insert = table.insert().values(
             # CrateDB does not provide the data types `DATE` and `TIME`.
-            #column_date="2022-03-19",
-            #column_time="06:04:19.222",
+            # column_date="2022-03-19",
+            # column_time="06:04:19.222",
             column_timestamp="1918-02-03 13:00:01",
         )
         conn.execute(insert)
@@ -200,15 +195,10 @@ def test_temporal_datatypes():
                 if metadata["breadcrumb"] == []:
                     metadata["metadata"]["replication-method"] = "FULL_TABLE"
 
-    test_runner = CrateDBTestRunner(
-        tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog
-    )
+    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog)
     test_runner.sync_all()
     for schema_message in test_runner.schema_messages:
-        if (
-            "stream" in schema_message
-            and schema_message["stream"] == altered_table_name
-        ):
+        if "stream" in schema_message and schema_message["stream"] == altered_table_name:
             # CrateDB does not provide the data types `DATE` and `TIME`.
             """
             assert (
@@ -269,18 +259,13 @@ def test_jsonb_json():
                 if metadata["breadcrumb"] == []:
                     metadata["metadata"]["replication-method"] = "FULL_TABLE"
 
-    test_runner = CrateDBTestRunner(
-        tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog
-    )
+    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog)
     test_runner.sync_all()
     for schema_message in test_runner.schema_messages:
-        if (
-            "stream" in schema_message
-            and schema_message["stream"] == altered_table_name
-        ):
+        if "stream" in schema_message and schema_message["stream"] == altered_table_name:
             # CrateDB: Vanilla implementation has empty `{}` here.
-            assert schema_message["schema"]["properties"]["column_jsonb"] == {'type': ['string', 'null']}
-            assert schema_message["schema"]["properties"]["column_json"] == {'type': ['string', 'null']}
+            assert schema_message["schema"]["properties"]["column_jsonb"] == {"type": ["string", "null"]}
+            assert schema_message["schema"]["properties"]["column_json"] == {"type": ["string", "null"]}
     assert test_runner.records[altered_table_name][0] == {
         "column_jsonb": {"foo": "bar"},
         "column_json": {"baz": "foo"},
@@ -321,15 +306,10 @@ def test_decimal():
                 if metadata["breadcrumb"] == []:
                     metadata["metadata"]["replication-method"] = "FULL_TABLE"
 
-    test_runner = CrateDBTestRunner(
-        tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog
-    )
+    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog)
     test_runner.sync_all()
     for schema_message in test_runner.schema_messages:
-        if (
-            "stream" in schema_message
-            and schema_message["stream"] == altered_table_name
-        ):
+        if "stream" in schema_message and schema_message["stream"] == altered_table_name:
             assert "number" in schema_message["schema"]["properties"]["column"]["type"]
 
 
@@ -411,9 +391,7 @@ def test_invalid_python_dates():
                 if metadata["breadcrumb"] == []:
                     metadata["metadata"]["replication-method"] = "FULL_TABLE"
 
-    test_runner = CrateDBTestRunner(
-        tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog
-    )
+    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog)
     with pytest.raises(ValueError):
         test_runner.sync_all()
 
@@ -433,22 +411,13 @@ def test_invalid_python_dates():
                 if metadata["breadcrumb"] == []:
                     metadata["metadata"]["replication-method"] = "FULL_TABLE"
 
-    test_runner = CrateDBTestRunner(
-        tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog
-    )
+    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog)
     test_runner.sync_all()
 
     for schema_message in test_runner.schema_messages:
-        if (
-            "stream" in schema_message
-            and schema_message["stream"] == altered_table_name
-        ):
-            assert ["string", "null"] == schema_message["schema"]["properties"]["date"][
-                "type"
-            ]
-            assert ["string", "null"] == schema_message["schema"]["properties"][
-                "datetime"
-            ]["type"]
+        if "stream" in schema_message and schema_message["stream"] == altered_table_name:
+            assert ["string", "null"] == schema_message["schema"]["properties"]["date"]["type"]
+            assert ["string", "null"] == schema_message["schema"]["properties"]["datetime"]["type"]
     assert test_runner.records[altered_table_name][0] == {
         # CrateDB does not provide the data type `DATE`.
         # "date": "4713-04-03 BC",
