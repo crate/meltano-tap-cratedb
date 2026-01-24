@@ -1,12 +1,37 @@
 """CrateDB tap implementation, based on the PostgreSQL tap."""
 from __future__ import annotations
 
+from functools import cached_property
+
+from sqlalchemy.engine import make_url
 from tap_postgres.client import (
     PostgresStream,
 )
 from tap_postgres.tap import TapPostgres
 
+from tap_cratedb.client import CrateDBConnector
+
 
 class TapCrateDB(TapPostgres):
     name = "tap-cratedb"
     default_stream_class = PostgresStream
+
+    @cached_property
+    def connector(self) -> CrateDBConnector:
+        """Get a configured connector for this Tap.
+
+        Connector is a singleton (one instance is used by the Tap and Streams).
+
+        """
+        # We mutate this url to use the ssh tunnel if enabled
+        url = make_url(self.get_sqlalchemy_url(config=self.config))
+        ssh_config = self.config.get("ssh_tunnel", {})
+
+        if ssh_config.get("enable", False):
+            # Return a new URL with SSH tunnel parameters
+            url = self.ssh_tunnel_connect(ssh_config=ssh_config, url=url)
+
+        return CrateDBConnector(
+            config=dict(self.config),
+            sqlalchemy_url=url.render_as_string(hide_password=False),
+        )
