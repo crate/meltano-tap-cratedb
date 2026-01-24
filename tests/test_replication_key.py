@@ -41,9 +41,11 @@ def replication_key_test(tap, table_name):
                     metadata["metadata"]["replication-method"] = "INCREMENTAL"
                     metadata["metadata"]["replication-key"] = "updated_at"
 
-    # Handy for debugging
-    # with open('data.json', 'w', encoding='utf-8') as f:
-    #    json.dump(tap_catalog, f, indent=4)
+    # Handy for debugging.
+    """
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(tap_catalog, f, indent=4)
+    """
 
     tap = TapCrateDB(config=SAMPLE_CONFIG, catalog=tap_catalog)
     tap.sync_all()

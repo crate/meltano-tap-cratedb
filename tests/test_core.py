@@ -1,3 +1,4 @@
+# ruff: noqa: ERA001
 import copy
 import datetime
 import decimal
