@@ -69,13 +69,9 @@ def test_null_replication_key_with_start_date():
         if table.exists(conn):
             table.drop(conn)
         metadata_obj.create_all(conn)
-        insert = table.insert().values(
-            data="Alpha", updated_at=pendulum.datetime(2022, 10, 20).to_iso8601_string()
-        )
+        insert = table.insert().values(data="Alpha", updated_at=pendulum.datetime(2022, 10, 20).to_iso8601_string())
         conn.execute(insert)
-        insert = table.insert().values(
-            data="Bravo", updated_at=pendulum.datetime(2022, 11, 20).to_iso8601_string()
-        )
+        insert = table.insert().values(data="Bravo", updated_at=pendulum.datetime(2022, 11, 20).to_iso8601_string())
         conn.execute(insert)
         insert = table.insert().values(data="Zulu", updated_at=None)
         conn.execute(insert)
@@ -126,13 +122,9 @@ def test_null_replication_key_without_start_date():
         if table.exists(conn):
             table.drop(conn)
         metadata_obj.create_all(conn)
-        insert = table.insert().values(
-            data="Alpha", updated_at=pendulum.datetime(2022, 10, 20).to_iso8601_string()
-        )
+        insert = table.insert().values(data="Alpha", updated_at=pendulum.datetime(2022, 10, 20).to_iso8601_string())
         conn.execute(insert)
-        insert = table.insert().values(
-            data="Bravo", updated_at=pendulum.datetime(2022, 11, 20).to_iso8601_string()
-        )
+        insert = table.insert().values(data="Bravo", updated_at=pendulum.datetime(2022, 11, 20).to_iso8601_string())
         conn.execute(insert)
         insert = table.insert().values(data="Zulu", updated_at=None)
         conn.execute(insert)

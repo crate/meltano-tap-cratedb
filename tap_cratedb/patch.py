@@ -18,9 +18,10 @@ def patch_datetime():
     def bind_processor(self, dialect):
         def process(value):
             if isinstance(value, (dt.datetime, dt.date)):
-                return value.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+                return value.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
             else:
                 return value
+
         return process
 
     DateTime.bind_processor = bind_processor
@@ -35,8 +36,8 @@ def patch_get_pk_constraint():
 
     TypeError: Object of type set is not JSON serializable
     """
-    from sqlalchemy.engine import reflection
     from crate.client.sqlalchemy import CrateDialect
+    from sqlalchemy.engine import reflection
 
     get_pk_constraint_dist = CrateDialect.get_pk_constraint
 
