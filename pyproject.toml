@@ -111,10 +111,10 @@ test = [
   "singer-sdk[testing]",
 ]
 [project.urls]
-changelog = "https://github.com/crate-workbench/meltano-tap-cratedb/blob/main/CHANGES.md"
-documentation = "https://github.com/crate-workbench/meltano-tap-cratedb"
-homepage = "https://github.com/crate-workbench/meltano-tap-cratedb"
-repository = "https://github.com/crate-workbench/meltano-tap-cratedb"
+changelog = "https://github.com/crate/meltano-tap-cratedb/blob/main/CHANGES.md"
+documentation = "https://github.com/crate/meltano-tap-cratedb"
+homepage = "https://github.com/crate/meltano-tap-cratedb"
+repository = "https://github.com/crate/meltano-tap-cratedb"
 [project.scripts]
 tap-cratedb = 'tap_cratedb.tap:TapCrateDB.cli'
 

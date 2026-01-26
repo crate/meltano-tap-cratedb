@@ -1,10 +1,10 @@
 # Singer tap / Meltano extractor for CrateDB
 
-[![Tests](https://github.com/crate-workbench/meltano-tap-cratedb/actions/workflows/main.yml/badge.svg)](https://github.com/crate-workbench/meltano-tap-cratedb/actions/workflows/main.yml)
-[![Test coverage](https://img.shields.io/codecov/c/gh/crate-workbench/meltano-tap-cratedb.svg)](https://codecov.io/gh/crate-workbench/meltano-tap-cratedb/)
+[![Tests](https://github.com/crate/meltano-tap-cratedb/actions/workflows/main.yml/badge.svg)](https://github.com/crate/meltano-tap-cratedb/actions/workflows/main.yml)
+[![Test coverage](https://img.shields.io/codecov/c/gh/crate/meltano-tap-cratedb.svg)](https://codecov.io/gh/crate/meltano-tap-cratedb/)
 [![Python versions](https://img.shields.io/pypi/pyversions/meltano-tap-cratedb.svg)](https://pypi.org/project/meltano-tap-cratedb/)
 
-[![License](https://img.shields.io/github/license/crate-workbench/meltano-tap-cratedb.svg)](https://github.com/crate-workbench/meltano-tap-cratedb/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/crate/meltano-tap-cratedb.svg)](https://github.com/crate/meltano-tap-cratedb/blob/main/LICENSE)
 [![Status](https://img.shields.io/pypi/status/meltano-tap-cratedb.svg)](https://pypi.org/project/meltano-tap-cratedb/)
 [![PyPI](https://img.shields.io/pypi/v/meltano-tap-cratedb.svg)](https://pypi.org/project/meltano-tap-cratedb/)
 [![Downloads](https://pepy.tech/badge/meltano-tap-cratedb/month)](https://pepy.tech/project/meltano-tap-cratedb/)
@@ -109,7 +109,7 @@ configure the `pip_url` of the component to point to a different location than t
 
 Use this URL to directly point to a specific Git repository reference.
 ```yaml
-pip_url: git+https://github.com/crate-workbench/meltano-tap-cratedb.git@main
+pip_url: git+https://github.com/crate/meltano-tap-cratedb.git@main
 ```
 
 Use a `pip`-like notation to link the CrateDB Singer tap in development mode,
@@ -130,7 +130,7 @@ pip_url: --editable=/path/to/sources/meltano-tap-cratedb
 [meltano | Hub]: https://hub.meltano.com/
 [Meltano SDK]: https://github.com/meltano/sdk
 [Meltano PostgreSQL tap]: https://github.com/MeltanoLabs/tap-postgres
-[meltano-tap-cratedb]: https://github.com/crate-workbench/meltano-tap-cratedb
+[meltano-tap-cratedb]: https://github.com/crate/meltano-tap-cratedb
 [Singer]: https://www.singer.io/
 [Singer Spec]: https://hub.meltano.com/singer/spec/
 [PipelineWise]: https://transferwise.github.io/pipelinewise/

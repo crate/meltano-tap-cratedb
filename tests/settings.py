@@ -4,7 +4,7 @@
 # (PostgreSQL) to `doc` (CrateDB). It could make sense to contribute
 # this switch to upstream [tap-postgres] in one way or another.
 #
-# https://github.com/crate-workbench/meltano-tap-cratedb/issues/6
+# https://github.com/crate/meltano-tap-cratedb/issues/6
 #
 # [tap-postgres]: https://github.com/MeltanoLabs/tap-postgres
 
