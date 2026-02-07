@@ -99,7 +99,7 @@ develop = [
 ]
 release = [
   "build<2",
-  "twine<5",
+  "twine<7",
 ]
 test = [
   "faker<21.0.0,>=18.5.1",
