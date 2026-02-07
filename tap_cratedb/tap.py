@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from functools import cached_property
 
+import tap_postgres
 from sqlalchemy.engine import make_url
 from tap_postgres.client import (
     PostgresStream,
@@ -29,7 +30,14 @@ class TapCrateDB(TapPostgres):
 
         if ssh_config.get("enable", False):  # pragma: no cover
             # Return a new URL with SSH tunnel parameters
-            url = self.ssh_tunnel_connect(ssh_config=ssh_config, url=url)
+            if hasattr(tap_postgres, "connection_parameters"):
+                from tap_postgres.connection_parameters import ConnectionParameters
+
+                url = self.ssh_tunnel_connect(
+                    ssh_config=ssh_config, connection_parameters=ConnectionParameters.from_tap_config(self.config)
+                )
+            else:
+                url = self.ssh_tunnel_connect(ssh_config=ssh_config, url=url)
 
         return CrateDBConnector(
             config=dict(self.config),
