@@ -87,7 +87,7 @@ This example demonstrates how to export data from the database into a file.
 
 Define the database connection string including credentials in SQLAlchemy format.
 ```shell
-export TAP_CRATEDB_SQLALCHEMY_URL='crate://admin:K4IgMXNvQBJM3CiElOiPHuSp6CiXPCiQYhB4I9dLccVHGvvvitPSYr1vTpt4@example.aks1.westeurope.azure.cratedb.net:4200?ssl=true'
+export TAP_CRATEDB_SQLALCHEMY_URL='crate://admin:password@example.aks1.westeurope.azure.cratedb.net:4200?ssl=true'
 ```
 
 Discover all available database streams.
@@ -126,4 +126,5 @@ pip_url: --editable=/path/to/sources/meltano-tap-cratedb
 [Meltano PostgreSQL tap]: https://github.com/MeltanoLabs/tap-postgres
 [meltano-tap-cratedb]: https://github.com/crate/meltano-tap-cratedb
 [Singer]: https://www.singer.io/
+[Singer Intro]: https://lorrystream.readthedocs.io/singer/intro.html
 [vanilla package on PyPI]: https://pypi.org/project/meltano-tap-cratedb/
