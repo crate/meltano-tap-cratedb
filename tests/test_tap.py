@@ -3,7 +3,7 @@ import json
 from contextlib import redirect_stdout
 from unittest import mock
 
-from singer_sdk._singerlib import Catalog
+from singer_sdk.singerlib import Catalog
 from singer_sdk.testing import sync_end_to_end
 
 from tap_cratedb.tap import TapCrateDB
