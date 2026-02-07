@@ -13,7 +13,7 @@ def patch_datetime():
     otherwise fail on this routine.
     """
 
-    from crate.client.sqlalchemy.dialect import DateTime
+    from sqlalchemy_cratedb.dialect import DateTime
 
     def bind_processor(self, dialect):
         def process(value):
@@ -36,8 +36,8 @@ def patch_get_pk_constraint():
 
     TypeError: Object of type set is not JSON serializable
     """
-    from crate.client.sqlalchemy import CrateDialect
     from sqlalchemy.engine import reflection
+    from sqlalchemy_cratedb.dialect import CrateDialect
 
     get_pk_constraint_dist = CrateDialect.get_pk_constraint
 
@@ -54,7 +54,7 @@ def patch_types():
     """
     Emulate PostgreSQL's `JSON` and `JSONB` types using CrateDB's `OBJECT` type.
     """
-    from crate.client.sqlalchemy.compiler import CrateTypeCompiler
+    from sqlalchemy_cratedb.compiler import CrateTypeCompiler
 
     def visit_JSON(self, type_, **kw):
         return "OBJECT"
