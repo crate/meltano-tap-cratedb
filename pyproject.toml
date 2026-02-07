@@ -82,7 +82,7 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "crate[sqlalchemy]<1,>=0.34",
+  "crate[sqlalchemy]>=0.34,<3",
   "cratedb-toolkit<0.0.42",
   'importlib-resources; python_version < "3.9"',
   "meltanolabs-tap-postgres<0.9",
