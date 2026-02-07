@@ -77,11 +77,10 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "crate[sqlalchemy]<1,>=0.34",
-  "cratedb-toolkit<0.0.42",
   "importlib-resources; python_version<'3.9'",
   "meltanolabs-tap-postgres<0.9",
   "singer-sdk<0.54,>=0.48",
+  "sqlalchemy-cratedb<0.42",
 ]
 optional-dependencies.develop = [
   "black<24",
