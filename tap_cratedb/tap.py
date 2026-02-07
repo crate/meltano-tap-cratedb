@@ -18,13 +18,13 @@ class TapCrateDB(TapPostgres):
 
     @cached_property
     def connector(self) -> CrateDBConnector:
-        """Get a configured connector for this Tap.
+        """
+        Get a configured connector for this Tap.
 
         Connector is a singleton (one instance is used by the Tap and Streams).
-
         """
         # We mutate this url to use the ssh tunnel if enabled
-        url = make_url(self.get_sqlalchemy_url(config=self.config))
+        url = make_url(self.config.get("sqlalchemy_url", "crate://"))
         ssh_config = self.config.get("ssh_tunnel", {})
 
         if ssh_config.get("enable", False):  # pragma: no cover
