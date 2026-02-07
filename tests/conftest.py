@@ -3,7 +3,7 @@ import logging
 
 pytest_plugins = ("singer_sdk.testing.pytest_plugin",)
 
-# Increase loggin for components we are working on.
+# Increase logging for components we are working on.
 logging.getLogger("sqlconnector").setLevel(logging.DEBUG)
 logging.getLogger("tap-cratedb").setLevel(logging.DEBUG)
 logging.getLogger("tap-postgres").setLevel(logging.DEBUG)

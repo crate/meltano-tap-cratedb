@@ -126,7 +126,8 @@ def test_tap_sync_summits():
     """
     Verify contents of a single table sync.
     """
-    catalog = Catalog.from_dict(json.load(open("tests/resources/cratedb-summits.json")))
+    with open("tests/resources/cratedb-summits.json") as f:
+        catalog = Catalog.from_dict(json.load(f))
 
     tap = TapCrateDB(config=singer_config, catalog=catalog)
     stream = tap.streams.get("sys-summits")
@@ -136,8 +137,10 @@ def test_tap_sync_summits():
     buffer.seek(0)
     payload = buffer.getvalue()
 
-    # Verify cardinality. Singer stream has two more lines.
-    length = len(payload.splitlines()) - 2
+    # Verify cardinality.
+    # Singer output includes a SCHEMA line and a STATE line in addition to RECORD lines.
+    record_lines = [line for line in payload.splitlines() if '"type": "RECORD"' in line]
+    length = len(record_lines)
     assert (
         length == cratedb_summits_cardinality
     ), f"In table 'sys.summits', expected {cratedb_summits_cardinality} records, got {length}"
