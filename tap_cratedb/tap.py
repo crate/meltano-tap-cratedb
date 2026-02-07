@@ -1,4 +1,5 @@
 """CrateDB tap implementation, based on the PostgreSQL tap."""
+
 from __future__ import annotations
 
 from functools import cached_property

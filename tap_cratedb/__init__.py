@@ -1,4 +1,5 @@
 """A Singer tap for CrateDB, built with the Meltano SDK, based on the PostgreSQL tap."""
+
 from importlib.metadata import PackageNotFoundError, version
 
 from tap_cratedb.patch import patch_sqlalchemy_dialect
