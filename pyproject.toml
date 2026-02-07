@@ -86,7 +86,7 @@ dependencies = [
   "cratedb-toolkit<0.0.42",
   'importlib-resources; python_version < "3.9"',
   "meltanolabs-tap-postgres<0.9",
-  "singer-sdk>=0.48,<0.54",
+  "singer-sdk<0.54,>=0.48",
 ]
 [project.optional-dependencies]
 develop = [
@@ -102,8 +102,8 @@ release = [
   "twine<7",
 ]
 test = [
-  "faker>=18.5.1,<38.0.0",
-  "pendulum>=2.1,<4.0",
+  "faker<38.0.0,>=18.5.1",
+  "pendulum<4.0,>=2.1",
   "pytest",
   "pytest-cov<8",
   "pytest-mock<4",
