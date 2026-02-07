@@ -1,6 +1,8 @@
 # Changelog for Meltano/Singer Tap for CrateDB
 
 ## In progress
+
+## 2026-02-07 v0.0.1
 - Updated to `meltanolabs-tap-postgres` v0.8.x and `singer-sdk` v0.53.x
 - Migrated to `sqlalchemy-cratedb`
 - CI: Validated on modern Python versions
