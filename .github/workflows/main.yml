@@ -37,6 +37,8 @@ jobs:
       PYTHON: ${{ matrix.python-version }}
       # Do not tear down Testcontainers
       TC_KEEPALIVE: true
+      UV_PYTHON_DOWNLOADS: never
+      UV_SYSTEM_PYTHON: true
 
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
     services:
@@ -61,19 +63,19 @@ jobs:
       uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
-        architecture: x64
-        cache: 'pip'
-        cache-dependency-path: 'pyproject.toml'
+
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v7
+      with:
+        cache-dependency-glob: |
+          pyproject.toml
+        cache-suffix: ${{ matrix.python-version }}
+        enable-cache: true
+        version: "latest"
 
     - name: Set up project
       run: |
-
-        # `setuptools 0.64.0` adds support for editable install hooks (PEP 660).
-        # https://github.com/pypa/setuptools/blob/main/CHANGES.rst#v6400
-        pip install "setuptools>=64" --upgrade
-
-        # Install package in editable mode.
-        pip install --use-pep517 --prefer-binary --editable=.[test,develop]
+        uv pip install --editable='.[develop,test]'
 
     - name: Run linter and software tests
       run: |
