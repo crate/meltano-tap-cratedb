@@ -84,7 +84,7 @@ dependencies = [
   "singer-sdk<0.54,>=0.48",
 ]
 optional-dependencies.develop = [
-  "black<24",
+  "black<26",
   "mypy<1.20",
   "poethepoet<1",
   "pyproject-fmt<3",
