@@ -101,7 +101,7 @@ TapCrateDBTestNOSQLALCHEMY = get_tap_test_class(
 )
 
 
-# creating testing instance for isolated table in postgres
+# creating testing instance for isolated table in CrateDB
 TapCrateDBTestSelectedColumnsOnly = get_tap_test_class(
     tap_class=TapCrateDB,
     config=SAMPLE_CONFIG,
@@ -424,12 +424,13 @@ def test_invalid_python_dates():
                 if metadata["breadcrumb"] == []:
                     metadata["metadata"]["replication-method"] = "FULL_TABLE"
 
-    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=SAMPLE_CONFIG, catalog=tap_catalog)
+    test_runner = CrateDBTestRunner(tap_class=TapCrateDB, config=copied_config, catalog=tap_catalog)
     test_runner.sync_all()
 
     for schema_message in test_runner.schema_messages:
         if "stream" in schema_message and schema_message["stream"] == altered_table_name:
-            assert ["string", "null"] == schema_message["schema"]["properties"]["date"]["type"]
+            # CrateDB does not provide the data type `DATE`.
+            # assert ["string", "null"] == schema_message["schema"]["properties"]["date"]["type"]
             assert ["string", "null"] == schema_message["schema"]["properties"]["datetime"]["type"]
     assert test_runner.records[altered_table_name][0] == {
         # CrateDB does not provide the data type `DATE`.

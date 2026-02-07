@@ -59,7 +59,7 @@ within your `meltano.yml` configuration file like this.
   variant: cratedb
   pip_url: meltano-tap-cratedb
   config:
-    sqlalchemy_url: "crate://admin:K4IgMXNvQBJM3CiElOiPHuSp6CiXPCiQYhB4I9dLccVHGvvvitPSYr1vTpt4@example.aks1.westeurope.azure.cratedb.net:4200?ssl=true"}
+    sqlalchemy_url: "crate://admin:password@example.aks1.westeurope.azure.cratedb.net:4200?ssl=true"
 ```
 
 
@@ -120,20 +120,10 @@ pip_url: --editable=/path/to/sources/meltano-tap-cratedb
 ```
 
 
-[600+ connectors]: https://hub.meltano.com/
-[Apache Lucene]: https://lucene.apache.org/
 [CrateDB]: https://cratedb.com/product
 [CrateDB Cloud]: https://console.cratedb.cloud/
-[ELT]: https://en.wikipedia.org/wiki/Extract,_load,_transform
-[ETL]: https://en.wikipedia.org/wiki/Extract,_transform,_load
-[Meltano]: https://meltano.com/
-[meltano | Hub]: https://hub.meltano.com/
 [Meltano SDK]: https://github.com/meltano/sdk
 [Meltano PostgreSQL tap]: https://github.com/MeltanoLabs/tap-postgres
 [meltano-tap-cratedb]: https://github.com/crate/meltano-tap-cratedb
 [Singer]: https://www.singer.io/
-[Singer Spec]: https://hub.meltano.com/singer/spec/
-[PipelineWise]: https://transferwise.github.io/pipelinewise/
-[PipelineWise Taps]: https://transferwise.github.io/pipelinewise/user_guide/yaml_config.html
-[SQLAlchemy]: https://www.sqlalchemy.org/
 [vanilla package on PyPI]: https://pypi.org/project/meltano-tap-cratedb/
