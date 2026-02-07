@@ -83,7 +83,7 @@ dependencies = [
   "sqlalchemy-cratedb<0.42",
 ]
 optional-dependencies.develop = [
-  "black<26",
+  "black<27",
   "mypy<1.20",
   "poethepoet<1",
   "pyproject-fmt<3",
