@@ -86,7 +86,7 @@ dependencies = [
   "crate[sqlalchemy]<1,>=0.34",
   "cratedb-toolkit<0.0.42",
   'importlib-resources; python_version < "3.9"',
-  "meltanolabs-tap-postgres==0.0.6",
+  "meltanolabs-tap-postgres==0.0.8",
 ]
 [project.optional-dependencies]
 develop = [

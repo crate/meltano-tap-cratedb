@@ -139,11 +139,11 @@ def test_tap_sync_summits():
 
     # Verify cardinality.
     # Singer output includes a SCHEMA line and a STATE line in addition to RECORD lines.
-    record_lines = [line for line in payload.splitlines() if '"type": "RECORD"' in line]
+    record_lines = [line for line in payload.splitlines() if '"type":"RECORD"' in line]
     length = len(record_lines)
     assert (
         length == cratedb_summits_cardinality
     ), f"In table 'sys.summits', expected {cratedb_summits_cardinality} records, got {length}"
 
     # Verify content per single sample.
-    assert '"region": "Bergamo Alps"' in payload
+    assert '"region":"Bergamo Alps"' in payload
