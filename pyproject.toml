@@ -80,7 +80,6 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "importlib-resources; python_version<'3.9'",
   "meltanolabs-tap-postgres<0.9",
   "singer-sdk<0.54,>=0.48",
   "sqlalchemy-cratedb<0.42",
