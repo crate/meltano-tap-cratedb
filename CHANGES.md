@@ -1,7 +1,7 @@
 # Changelog for Meltano/Singer Tap for CrateDB
 
 ## In progress
-- Updated to `meltanolabs-tap-postgres` v0.0.8
+- Updated to `meltanolabs-tap-postgres` v0.8.x
 
 ## 2026-01-26 v0.0.0
 - Make it work.

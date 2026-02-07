@@ -68,8 +68,7 @@ def test_null_replication_key_with_start_date():
         Column("updated_at", TIMESTAMP),
     )
     with engine.begin() as conn:
-        if table.exists(conn):
-            table.drop(conn)
+        table.drop(conn, checkfirst=True)
         metadata_obj.create_all(conn)
         insert = table.insert().values(data="Alpha", updated_at=pendulum.datetime(2022, 10, 20).to_iso8601_string())
         conn.execute(insert)
@@ -121,8 +120,7 @@ def test_null_replication_key_without_start_date():
         Column("updated_at", TIMESTAMP),
     )
     with engine.begin() as conn:
-        if table.exists(conn):
-            table.drop(conn)
+        table.drop(conn, checkfirst=True)
         metadata_obj.create_all(conn)
         insert = table.insert().values(data="Alpha", updated_at=pendulum.datetime(2022, 10, 20).to_iso8601_string())
         conn.execute(insert)
