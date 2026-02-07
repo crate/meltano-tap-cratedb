@@ -103,7 +103,7 @@ release = [
 ]
 test = [
   "faker>=18.5.1,<38.0.0",
-  "pendulum~=2.1",
+  "pendulum>=2.1,<4.0",
   "pytest<8",
   "pytest-cov<8",
   "pytest-mock<4",
