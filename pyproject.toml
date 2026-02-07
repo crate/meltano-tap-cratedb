@@ -105,7 +105,7 @@ test = [
   "faker>=18.5.1,<38.0.0",
   "pendulum~=2.1",
   "pytest<8",
-  "pytest-cov<5",
+  "pytest-cov<8",
   "pytest-mock<4",
   "singer-sdk[testing]<0.34",
 ]
