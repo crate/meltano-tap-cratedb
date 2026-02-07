@@ -29,6 +29,7 @@ cratedb_builtin_streams = [
     "information_schema-tables",
     "information_schema-user_mapping_options",
     "information_schema-user_mappings",
+    "information_schema-view_column_usage",
     "information_schema-views",
     "pg_catalog-pg_am",
     "pg_catalog-pg_attrdef",
