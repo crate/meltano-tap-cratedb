@@ -1,4 +1,5 @@
 """Tests standard tap features using the built-in SDK tests library."""
+
 import pytest
 
 pytest.skip("Will do that later", allow_module_level=True)
