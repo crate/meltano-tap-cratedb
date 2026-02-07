@@ -16,6 +16,7 @@ from tap_cratedb.client import CrateDBConnector
 
 class TapCrateDB(TapPostgres):
     name = "tap-cratedb"
+    package_name = "meltano-tap-cratedb"
     default_stream_class = PostgresStream
 
     @cached_property
