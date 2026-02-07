@@ -107,7 +107,7 @@ test = [
   "pytest<8",
   "pytest-cov<8",
   "pytest-mock<4",
-  "singer-sdk[testing]<0.34",
+  "singer-sdk[testing]<0.49",
 ]
 [project.urls]
 changelog = "https://github.com/crate/meltano-tap-cratedb/blob/main/CHANGES.md"
