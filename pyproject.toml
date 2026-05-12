@@ -81,7 +81,7 @@ dynamic = [
 ]
 dependencies = [
   "meltanolabs-tap-postgres<0.9",
-  "singer-sdk<0.54,>=0.48",
+  "singer-sdk<0.55,>=0.48",
   "sqlalchemy-cratedb<0.42",
 ]
 optional-dependencies.develop = [
