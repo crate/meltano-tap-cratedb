@@ -12,7 +12,8 @@
 
 ## About
 
-A [Singer] tap for [CrateDB], built with the [Meltano SDK] for custom extractors
+[meltano|Hub » tap-cratedb] is a [Singer] tap for [CrateDB],
+built with the [Meltano SDK] for custom extractors
 and loaders, and based on the [Meltano PostgreSQL tap].
 
 In Singer ELT jargon, a "tap" conceptually wraps a data source, where you
@@ -125,6 +126,7 @@ pip_url: --editable=/path/to/sources/meltano-tap-cratedb
 [Meltano SDK]: https://github.com/meltano/sdk
 [Meltano PostgreSQL tap]: https://github.com/MeltanoLabs/tap-postgres
 [meltano-tap-cratedb]: https://github.com/crate/meltano-tap-cratedb
+[meltano|Hub » tap-cratedb]: https://hub.meltano.com/extractors/tap-cratedb/
 [Singer]: https://www.singer.io/
 [Singer Intro]: https://lorrystream.readthedocs.io/singer/intro.html
 [vanilla package on PyPI]: https://pypi.org/project/meltano-tap-cratedb/
