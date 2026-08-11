@@ -94,7 +94,7 @@ optional-dependencies.develop = [
 ]
 optional-dependencies.release = [
   "build<2",
-  "twine<7",
+  "twine<8",
 ]
 optional-dependencies.test = [
   "faker<41,>=18.5.1",
