@@ -80,7 +80,7 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "meltanolabs-tap-postgres<0.9",
+  "meltanolabs-tap-postgres<0.11",
   "singer-sdk<0.54,>=0.48",
   "sqlalchemy-cratedb<0.42",
 ]
