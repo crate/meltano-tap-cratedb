@@ -105,8 +105,8 @@ optional-dependencies.test = [
   "singer-sdk[testing]",
 ]
 urls.changelog = "https://github.com/crate/meltano-tap-cratedb/blob/main/CHANGES.md"
-urls.documentation = "https://github.com/crate/meltano-tap-cratedb"
-urls.homepage = "https://github.com/crate/meltano-tap-cratedb"
+urls.documentation = "https://hub.meltano.com/extractors/tap-cratedb/"
+urls.issues = "https://github.com/crate/meltano-tap-cratedb/issues"
 urls.repository = "https://github.com/crate/meltano-tap-cratedb"
 scripts.tap-cratedb = "tap_cratedb.tap:TapCrateDB.cli"
 
